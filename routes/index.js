@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var Themas = require('../models/themas').Themas;
-
 /* GET home page. */
 router.get('/:id?', function(req, res, next) {
 	if(req.params.id){
@@ -10,6 +8,8 @@ router.get('/:id?', function(req, res, next) {
 	} else {
 		var index = 'welcome';
 	}
+	
+	var Themas = require('../models/themas').Themas;
 	
 	Themas.findOne({'uri':index}, function(err,ttext){
 		if(!ttext){
@@ -62,6 +62,11 @@ router.get('/add/:url/:name/:body?', function(req, res, next) {
 	themas.save(function(err, user, affected){
 		console.log('ok');
 	});
+});
+
+
+router.get('/', function(reg, res, next){
+	res.render('reg');
 });
 
 module.exports = router;

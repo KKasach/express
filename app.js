@@ -7,11 +7,13 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var reg = require('./routes/reg');
 var config = require('./config/index');
-
+var chekAuth = require('./utils/checkAuth');
 
 var app = express();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,10 +27,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 
+app.use('/reg', reg);
 app.use('/users', users);
-
+app.use('/', index);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -47,9 +49,13 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.use(function(req, res, next){
+	res.locals = {
+		userid: req.session.user
+	};
+});
 
-
-
+//app.get('/logout', checkAuth, reg.logout);
 
 app.listen(config.get('port'));
 

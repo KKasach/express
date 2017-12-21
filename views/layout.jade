@@ -9,17 +9,10 @@ html
 			a(href='news') Новости
 			a(href='about') О компании
 			a(href='services') Услуги
- 
-		form(action='/', method='POST', enctype='text/plain')
-		.form-group
-			label(for='exampleInputEmail1') Email address
-			input#exampleInputEmail1.form-control(type='email', placeholder='Email', name='email')
-		.form-group
-			label(for='exampleInputPassword1') Password
-			input#exampleInputPassword1.form-control(type='password', placeholder='Password', name='password')
-		.form-group
-			label(for='exampleInputFile') File input
-			input#exampleInputFile(type='file', name='file')
-		button.btn.btn-default(type='submit') Submit
-
+			
+		if userid
+			a(href='/logout') Выход
+		else 
+			a(href='/reg') Регистрация !{userid}
 	block content
+	

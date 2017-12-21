@@ -1,6 +1,7 @@
 var mongoose = require('../config/mongoose'),
 	Schema = mongoose.Schema;
-var Schema = new Schema({
+	
+var schema = new Schema({
 	name:{	
 		type: String,
 		required:true,
@@ -16,3 +17,5 @@ var Schema = new Schema({
 		required:true
 	}
 })	
+
+module.exports = schema;
